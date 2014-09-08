@@ -28,7 +28,7 @@ table {
     border-collapse: collapse;
 }
 
-table#_95_287_sbp {
+table#blocks {
     position: absolute;
     left: -60px;
     top: -60px;
@@ -64,7 +64,7 @@ td.hidden {
     visibility: hidden;
 }
 
-table#_95_287_sbp td {
+table#blocks td {
     border: solid 1px #f0f0f0;
     background-color: white;
 }

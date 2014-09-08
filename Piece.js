@@ -2,8 +2,8 @@
 
 var Piece = function () {
     //set the type of the piece
-    this.type = _95_287_sbp.types[Math.floor(Math.random() * _95_287_sbp.types.length)];
-    this.map = _95_287_sbp.maps[this.type];
+    this.type = blocks.types[Math.floor(Math.random() * blocks.types.length)];
+    this.map = blocks.maps[this.type];
     this.position = {top: 0, left: 1};
 
     this.set_direction();
@@ -12,7 +12,7 @@ var Piece = function () {
 
 Piece.prototype.set_direction = function (direction) {
     this.direction = direction ||
-        _95_287_sbp.directions[Math.floor(Math.random() * _95_287_sbp.directions.length)];
+        blocks.directions[Math.floor(Math.random() * blocks.directions.length)];
 };
 
 Piece.prototype.set_position = function (top, left) {
@@ -73,15 +73,15 @@ Piece.prototype.bottommost = function (direction) {
 };
 
 Piece.prototype.rotate_valid = function () {
-    var next = _95_287_sbp.next_direction(this.direction);
+    var next = blocks.next_direction(this.direction);
 
     return this.position.left + this.leftmost(next) >= 0 &&
-        this.position.left + this.rightmost(next) < _95_287_sbp.BOARD_WIDTH;
+        this.position.left + this.rightmost(next) < blocks.BOARD_WIDTH;
 };
 
 //returns whether it hit bottom
 Piece.prototype.down_valid = function () {
-    return this.position.top + this.bottommost() + 1 - 2 < _95_287_sbp.BOARD_HEIGHT;
+    return this.position.top + this.bottommost() + 1 - 2 < blocks.BOARD_HEIGHT;
 };
 
 Piece.prototype.left_valid = function () {
@@ -91,7 +91,7 @@ Piece.prototype.left_valid = function () {
 
 Piece.prototype.right_valid = function () {
     //the 2 is a kludge
-    return this.position.left + this.rightmost() + 1 - 2 < _95_287_sbp.BOARD_WIDTH;
+    return this.position.left + this.rightmost() + 1 - 2 < blocks.BOARD_WIDTH;
 };
 
 //Piece.prototype.snap_right = function () { while(!this.move_right()); };

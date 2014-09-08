@@ -1,14 +1,14 @@
 "use strict";
 
-var _95_287_sbp = {};
+var blocks = {};
 
-_95_287_sbp.setup = function () {
+blocks.setup = function () {
     var self = this, i;
 
     this.board = new Board({
-        $frame: $("#_95_287_sbp"),
-        height: _95_287_sbp.BOARD_HEIGHT,
-        width: _95_287_sbp.BOARD_WIDTH,
+        $frame: $("#blocks"),
+        height: blocks.BOARD_HEIGHT,
+        width: blocks.BOARD_WIDTH,
         over: 2
     });
     
@@ -97,11 +97,11 @@ _95_287_sbp.setup = function () {
         }
     });*/
     
-    _95_287_sbp.run_game();
+    blocks.run_game();
 };
 
 //this is going to need to be fixed later
-_95_287_sbp.run_game = function () {
+blocks.run_game = function () {
     var self = this;
 
     this.runLoop = setInterval(function () {
@@ -117,11 +117,11 @@ _95_287_sbp.run_game = function () {
 };
 
 //obviously going to need to add more to this later
-_95_287_sbp.end_game = function () {
+blocks.end_game = function () {
     clearInterval(this.runLoop);
 };
 
-_95_287_sbp.new_piece = function () {
+blocks.new_piece = function () {
     if(this.currPiece) {
         this.board.write(this.currPiece);
     }
@@ -137,7 +137,7 @@ _95_287_sbp.new_piece = function () {
     this.board.clear_lines();
 };
 
-_95_287_sbp.next_direction = function (direction) {
+blocks.next_direction = function (direction) {
     switch(direction) {
     case "north": return "south";
     case "south": return "east";
@@ -148,14 +148,14 @@ _95_287_sbp.next_direction = function (direction) {
     }
 };
 
-_95_287_sbp.BOARD_WIDTH = 10; //width of the board in blocks
-_95_287_sbp.BOARD_HEIGHT = 20; //height of the board in blocks
-_95_287_sbp.NUM_BLOCKS = 4; //the number of blocks in a piece... remove later
+blocks.BOARD_WIDTH = 10; //width of the board in blocks
+blocks.BOARD_HEIGHT = 20; //height of the board in blocks
+blocks.NUM_BLOCKS = 4; //the number of blocks in a piece... remove later
 
-//These are our _95_287_sbp "enums"
-_95_287_sbp.types = Object.freeze(['i', 'j', 'l', 'o', 'z', 't', 's']);
-_95_287_sbp.directions = Object.freeze(["north", "south", "east", "west"]);
-_95_287_sbp.colors = Object.freeze({0: "white",
+//These are our blocks "enums"
+blocks.types = Object.freeze(['i', 'j', 'l', 'o', 'z', 't', 's']);
+blocks.directions = Object.freeze(["north", "south", "east", "west"]);
+blocks.colors = Object.freeze({0: "white",
                                1: "green",
                                2: "blue",
                                3: "yellow",
@@ -163,7 +163,7 @@ _95_287_sbp.colors = Object.freeze({0: "white",
                                5: "red",
                                6: "pink",
                                7: "grey"});
-_95_287_sbp.maps = Object.freeze({
+blocks.maps = Object.freeze({
     i: {
         north: [[0, 0, 0, 0],
                 [7, 7, 7, 7],

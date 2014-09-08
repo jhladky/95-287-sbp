@@ -106,14 +106,14 @@ Board.prototype.write = Board._piece_action(function (piece, i, j) {
 Board.prototype.set_piece = Board._piece_action(function (piece, i, j) {
     var pos = piece.position;
 
-    this.rows[i][j].css("background-color", _95_287_sbp.colors[
+    this.rows[i][j].css("background-color", blocks.colors[
         piece.map[piece.direction][i - pos.top][j - pos.left]
     ]);
 });
 
 //clear a square starting from position and going dim
 Board.prototype.clear_piece = Board._piece_action(function (piece, i, j) {
-    this.rows[i][j].css("background-color", _95_287_sbp.colors[0]);
+    this.rows[i][j].css("background-color", blocks.colors[0]);
 });
 
 Board.prototype.check_piece = Board._piece_action(function (piece, i, j) {
