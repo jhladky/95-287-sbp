@@ -1,14 +1,14 @@
 "use strict";
 
 /**
- * @constructor Board
+ * @constructor blocks.Board
  * @param {Object} board - Configuration object.
  * @param {jQuery} board.$frame - Table element to construct the board in.
  * @param {number} board.height - Height of the board.
  * @param {number} board.width - Width of the board.
  * @param {number} board.over - Number of hidden overflow cells to add.
  */
-var Board = function (board) {
+blocks.Board = function (board) {
     var i, j;
 
     this.$frame = board.$frame;
@@ -28,7 +28,7 @@ var Board = function (board) {
 
     //board includes two non-visible rows at the top, where pieces start
     //and two non-visible columns on each side
-    this._board = Board._blank_board(this._height, this._width);
+    this._board = blocks.Board._blank_board(this._height, this._width);
 
     for (i = 0; i < this._height; i++) {
         var row = [], $row = $("<tr>");
@@ -44,7 +44,7 @@ var Board = function (board) {
     }
 };
 
-Board._blank_board = function (height, width) {
+blocks.Board._blank_board = function (height, width) {
     var i, j, board = [], row;
 
     for (i = 0; i < height; i++) {
@@ -59,7 +59,7 @@ Board._blank_board = function (height, width) {
 };
 
 // fill out a row
-Board.prototype._row = function ($row, row) {
+blocks.Board.prototype._row = function ($row, row) {
     var i;
 
     for (i = 0; i < this._width; i++) {
@@ -75,7 +75,7 @@ Board.prototype._row = function ($row, row) {
 };
 
 // helper function
-Board._piece_action = function (action) {
+blocks.Board._piece_action = function (action) {
     return function (piece)  {
         var i, j, res;
 
@@ -96,14 +96,14 @@ Board._piece_action = function (action) {
 
 // write a piece to the board, at the position in the piece
 //SHOULD BE WRITE_PIECE, or change the others to remove _piece
-Board.prototype.write = Board._piece_action(function (piece, i, j) {
+blocks.Board.prototype.write = blocks.Board._piece_action(function (piece, i, j) {
     var pos = piece.position;
 
     this._board[i][j] =
         piece.map[piece.direction][i - pos.top][j - pos.left];
 });
 
-Board.prototype.set_piece = Board._piece_action(function (piece, i, j) {
+blocks.Board.prototype.set_piece = blocks.Board._piece_action(function (piece, i, j) {
     var pos = piece.position;
 
     this.rows[i][j].css("background-color", blocks.colors[
@@ -112,17 +112,17 @@ Board.prototype.set_piece = Board._piece_action(function (piece, i, j) {
 });
 
 //clear a square starting from position and going dim
-Board.prototype.clear_piece = Board._piece_action(function (piece, i, j) {
+blocks.Board.prototype.clear_piece = blocks.Board._piece_action(function (piece, i, j) {
     this.rows[i][j].css("background-color", blocks.colors[0]);
 });
 
-Board.prototype.check_piece = Board._piece_action(function (piece, i, j) {
+blocks.Board.prototype.check_piece = blocks.Board._piece_action(function (piece, i, j) {
     return this._board[i + 1][j];
 });
 
 //remove full lines
 //return the number of lines removed
-Board.prototype.clear_lines = function () {
+blocks.Board.prototype.clear_lines = function () {
     var self = this;
     var cnt = 0, i, j, lines = [], full;
 
@@ -159,7 +159,7 @@ Board.prototype.clear_lines = function () {
 };
 
 // debuggging function
-Board.prototype.print = function () {
+blocks.Board.prototype.print = function () {
     var i;
 
     for (i = 0; i < this._height; i++) {

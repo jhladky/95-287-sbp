@@ -1,6 +1,6 @@
 "use strict";
 
-var Piece = function () {
+blocks.Piece = function () {
     //set the type of the piece
     this.type = blocks.types[Math.floor(Math.random() * blocks.types.length)];
     this.map = blocks.maps[this.type];
@@ -10,17 +10,17 @@ var Piece = function () {
     this.dim = this.map[this.direction].length; //will never change as long as type doesn't change
 };
 
-Piece.prototype.set_direction = function (direction) {
+blocks.Piece.prototype.set_direction = function (direction) {
     this.direction = direction ||
         blocks.directions[Math.floor(Math.random() * blocks.directions.length)];
 };
 
-Piece.prototype.set_position = function (top, left) {
+blocks.Piece.prototype.set_position = function (top, left) {
     this.position.top = top;
     this.position.left = left;
 };
 
-Piece.prototype.leftmost = function (direction) {
+blocks.Piece.prototype.leftmost = function (direction) {
     var maxLeft = 0, i, j;
 
     for (i = 0; i < this.dim; i++) {
@@ -34,7 +34,7 @@ Piece.prototype.leftmost = function (direction) {
     return this.dim - 1 - maxLeft;
 };
 
-Piece.prototype.rightmost = function (direction) {
+blocks.Piece.prototype.rightmost = function (direction) {
     var maxRight = this.dim - 1, i, j;
 
     for (i = 0; i < this.dim; i++) {
@@ -48,7 +48,7 @@ Piece.prototype.rightmost = function (direction) {
     return this.dim - 1 - maxRight;
 };
 
-Piece.prototype.topmost = function (direction) {
+blocks.Piece.prototype.topmost = function (direction) {
     var i, j;
 
     for (i = 0; i < this.dim; i++) {
@@ -60,7 +60,7 @@ Piece.prototype.topmost = function (direction) {
     }
 };
 
-Piece.prototype.bottommost = function (direction) {
+blocks.Piece.prototype.bottommost = function (direction) {
     var i, j;
 
     for (i = this.dim - 1; i >= 0; i--) {
@@ -72,7 +72,7 @@ Piece.prototype.bottommost = function (direction) {
     }
 };
 
-Piece.prototype.rotate_valid = function () {
+blocks.Piece.prototype.rotate_valid = function () {
     var next = blocks.next_direction(this.direction);
 
     return this.position.left + this.leftmost(next) >= 0 &&
@@ -80,25 +80,25 @@ Piece.prototype.rotate_valid = function () {
 };
 
 //returns whether it hit bottom
-Piece.prototype.down_valid = function () {
+blocks.Piece.prototype.down_valid = function () {
     return this.position.top + this.bottommost() + 1 - 2 < blocks.BOARD_HEIGHT;
 };
 
-Piece.prototype.left_valid = function () {
+blocks.Piece.prototype.left_valid = function () {
     //the 2 is a kludge
     return this.position.left + this.leftmost() - 1 - 2 >= 0;
 };
 
-Piece.prototype.right_valid = function () {
+blocks.Piece.prototype.right_valid = function () {
     //the 2 is a kludge
     return this.position.left + this.rightmost() + 1 - 2 < blocks.BOARD_WIDTH;
 };
 
-//Piece.prototype.snap_right = function () { while(!this.move_right()); };
+//blocks.Piece.prototype.snap_right = function () { while(!this.move_right()); };
 
-//Piece.prototype.snap_left = function () { while(!this.move_left()); };
+//blocks.Piece.prototype.snap_left = function () { while(!this.move_left()); };
 
-/*Piece.prototype.snap_down = function () {
+/*blocks.Piece.prototype.snap_down = function () {
     while(!this.move_down());
     return true;
 };*/

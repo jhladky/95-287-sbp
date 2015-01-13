@@ -5,14 +5,14 @@ var blocks = {};
 blocks.setup = function () {
     var self = this, i;
 
-    this.board = new Board({
+    this.board = new this.Board({
         $frame: $("#blocks"),
         height: blocks.BOARD_HEIGHT,
         width: blocks.BOARD_WIDTH,
         over: 2
     });
     
-    this.next = new Board({
+    this.next = new this.Board({
         $frame: $("#nextPiece"),
         height: 4,
         width: 5,
@@ -21,7 +21,7 @@ blocks.setup = function () {
 
     $("#nextPiece > tbody").prepend("<tr><td colspan=4>NEXT PIECE</td></tr>");
 
-    this.nextPiece = new Piece();
+    this.nextPiece = new this.Piece();
     this.new_piece();
 
     $(window).keydown(function (evt) {
@@ -131,7 +131,7 @@ blocks.new_piece = function () {
     this.currPiece.set_position(2, 5); //fix later
     this.board.set_piece(this.currPiece);
 
-    this.nextPiece = new Piece();
+    this.nextPiece = new this.Piece();
     this.next.set_piece(this.nextPiece);
 
     this.board.clear_lines();
